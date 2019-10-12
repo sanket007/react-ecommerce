@@ -1,9 +1,5 @@
 import { CartActionTypes } from "./cart.types";
-import {
-  getItemsOrganized,
-  addItemQuantity,
-  decreaseItemQuantity
-} from "./cart.utils";
+import { getItemsOrganized, decreaseItemQuantity } from "./cart.utils";
 const INITIAL_STATE = {
   hidden: true,
   cartItems: []

@@ -12,13 +12,6 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 class App extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     currentUser: null
-  //   };
-  // }
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -32,15 +25,8 @@ class App extends React.Component {
             id: snapShot.id,
             ...snapShot.data()
           });
-          // this.setState({
-          //   currentUser: {
-          //     id: snapShot.id,
-          //     ...snapShot.data()
-          //   }
-          // });
         });
       }
-      // this.setState({ currentUser: userAuth });
       setCurrentUser(userAuth);
     });
   }
@@ -52,12 +38,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Header currentUser={this.state.currentUser} /> */}
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
-          {/* <Route exact path="/signin" component={SignInAndSignUp} /> */}
+          <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={Checkout} />
           <Route
             exact
