@@ -7,6 +7,11 @@ export const selectShopItems = createSelector(
   shop => shop.collection
 );
 
+export const selectIsLoading = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
+
 export const selectShopPreviewItems = createSelector(
   [selectShopItems],
   collection =>
@@ -18,3 +23,8 @@ export const selectCollection = urlParam =>
     [selectShopItems],
     collections => (collections ? collections[urlParam] : null)
   );
+
+export const selectIsCollectionsAreLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.collection
+);
