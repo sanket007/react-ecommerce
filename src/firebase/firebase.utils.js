@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import collectionItemComponent from "../components/collection-item/collection-item.component";
 
 const config = {
   apiKey: "AIzaSyCWRzEstP5lXEIvDBBcS-_rzkNjnGTCkcI",
@@ -17,9 +16,6 @@ const config = {
 export const createUserProfileDocument = async (userAuth, additinalData) => {
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-
-  const userCol = firestore.collection("users");
-  const collectionSnapShot = await userCol.get();
 
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
@@ -72,13 +68,22 @@ export const collectionsSnapShotToMap = collections => {
   }, {});
 };
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+googleProvider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 export default firebase;

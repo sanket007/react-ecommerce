@@ -9,7 +9,7 @@ import {
 } from "../../redux/shop/shop.selectors";
 
 import { connect } from "react-redux";
-import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import { createStructuredSelector } from "reselect";
@@ -54,7 +54,7 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsStart: () => dispatch(fetchCollectionsStartAsync())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 const mapStateToProps = createStructuredSelector({
